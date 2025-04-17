@@ -2,62 +2,106 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>🔐 Message codé 🔓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔐 Terminal DSI - Chiffrement</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: #1e1e1e;
-      font-family: Consolas, monospace;
-      color: #d4d4d4;
+      background-color: #0d0d0d;
+      font-family: 'Courier New', Courier, monospace;
+      color: #00ffcc;
       margin: 0;
       padding: 20px;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
 
     h1 {
-      color: #007acc;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    label {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
     }
 
     textarea {
-      width: 80%;
-      height: 100px;
-      margin-bottom: 10px;
-      background-color: #2e2e2e;
-      color: #d4d4d4;
-      border: none;
+      width: 100%;
+      max-width: 700px;
+      height: 120px;
+      background-color: #1a1a1a;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
       padding: 10px;
+      font-size: 1rem;
       resize: vertical;
+      margin-bottom: 15px;
     }
 
     button {
-      background-color: #007acc;
-      color: white;
+      background-color: #00ffcc;
+      color: #0d0d0d;
       border: none;
       padding: 10px 20px;
       margin: 5px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #00e6b8;
     }
 
     #output {
-      background-color: #2e2e2e;
-      color: #d4d4d4;
-      padding: 10px;
-      margin-top: 10px;
+      width: 100%;
+      max-width: 700px;
+      background-color: #1a1a1a;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
+      padding: 15px;
+      margin-top: 20px;
       white-space: pre-wrap;
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
+      word-break: break-word;
+      font-size: 1rem;
+      min-height: 80px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      textarea, #output {
+        font-size: 0.9rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>🔐 Message codé 🔓</h1>
+  <h1>🔐 Terminal DSI - Chiffrement 🔓</h1>
 
   <label for="input">💬 Entrez votre message :</label><br>
   <textarea id="input" placeholder="Tapez votre message ici..."></textarea><br>
 
-  <button onclick="chiffrer()">🔐 Chiffrer</button>
-  <button onclick="dechiffrer()">🔓 Déchiffrer</button>
+  <div>
+    <button onclick="chiffrer()">🔐 Chiffrer</button>
+    <button onclick="dechiffrer()">🔓 Déchiffrer</button>
+  </div>
 
   <div id="output" placeholder="Résultat..."></div>
 
@@ -67,6 +111,7 @@
       'a':'r','b':'q','c':'m','d':'u','e':'l','f':'y','g':'x','h':'z','i':'n','j':'k','k':'o','l':'v','m':'a','n':'j','o':'t','p':'b','q':'h','r':'s','s':'e','t':'f','u':'c','v':'d','w':'g','x':'i','y':'p','z':'w',
       'à':'$','â':'}','ä':'^','á':'|','æ':'@','ç':'#','é':'*','è':'!','ê':'&','ë':'%','î':'(','ï':')','ì':'[','í':']','ô':'~','ö':'`','ò':'{','ó':'}','œ':'=','ù':'/','û':'\\','ü':'<','ú':'>','ÿ':'+','ñ':'?'
     };
+
     const dechiffrement = Object.fromEntries(Object.entries(chiffrement).map(([k,v]) => [v,k]));
 
     function chiffrer() {
